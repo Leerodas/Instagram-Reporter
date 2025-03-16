@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 # The following code is a simple implementation of the Page Transactions pattern
 # Works on Python 3.11+
-from guara.abstract_transaction import AbstractTransaction
+from guara.abstract_transaction import AbstractTransaction, Application
 
 # Load configuration
 config = open("config.json", "r")
@@ -148,16 +148,6 @@ class ReportUser(AbstractTransaction):
             )
         )
         close_button.click()
-
-
-# Application Class (Orchestrator)
-class Application:
-    def __init__(self, driver):
-        self._driver = driver
-
-    def at(self, transaction_class, *args, **kwargs):
-        transaction = transaction_class(self._driver)
-        return transaction.do(*args, **kwargs)
 
 
 # Main Script
